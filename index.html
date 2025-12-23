@@ -27,49 +27,86 @@
             --shadow: rgba(0, 0, 0, 0.15);
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             line-height: 1.6;
             color: var(--brown-dark);
             background: var(--cream);
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation - MEJORADO */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 1.5rem 3rem;
             z-index: 1000;
             transition: all 0.4s ease;
             background: transparent;
         }
 
         nav.scrolled {
-            background: rgba(248, 248, 220, 0.95);
+            background: rgba(248, 248, 220, 0.98);
             backdrop-filter: blur(15px);
-            padding: 1rem 3rem;
             box-shadow: 0 4px 20px var(--shadow);
         }
 
         .nav-container {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 1.5rem 3rem;
+            position: relative;
+        }
+
+        nav.scrolled .nav-container {
+            padding: 1rem 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                justify-content: center;
+                padding: 1.2rem 4rem;
+            }
+            
+            nav.scrolled .nav-container {
+                padding: 0.8rem 4rem;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+
+            .logo i {
+                font-size: 2.2rem;
+            }
         }
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
             font-weight: 600;
-            color: var(--beige);
-            text-decoration: none;
+            color: var(--cream);
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled .logo {
+            color: var(--brown-dark);
+            text-shadow: none;
         }
 
         .logo i {
@@ -85,22 +122,23 @@
         }
 
         nav a {
-            color: var(--beige);
-            text-decoration: none;
+            color: var(--cream);
             font-size: 0.95rem;
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         nav.scrolled a {
             color: var(--brown-dark);
+            text-shadow: none;
         }
 
         nav a:hover {
-            color: var(--gold-light);
+            color: var(--gold-medium);
         }
 
         nav a::after {
@@ -122,14 +160,31 @@
             display: none;
             background: none;
             border: none;
-            color: var(--gold-medium);
+            color: var(--cream);
             font-size: 1.8rem;
             cursor: pointer;
+            transition: color 0.3s;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        nav.scrolled .menu-toggle {
+            color: var(--brown-dark);
+            text-shadow: none;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+            }
         }
 
         .mobile-menu {
             display: none;
-            background: var(--gold-dark);
+            background: rgba(184, 134, 11, 0.98);
             backdrop-filter: blur(15px);
             padding: 2rem 0;
             position: absolute;
@@ -137,7 +192,7 @@
             left: 0;
             right: 0;
             width: 100%;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Añadido para mejor distinción en móvil */
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
 
         .mobile-menu.active {
@@ -150,6 +205,11 @@
             flex-direction: column;
             gap: 1.5rem;
             align-items: center;
+        }
+
+        .mobile-menu a {
+            color: var(--white);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
         /* Hero Section */
@@ -219,209 +279,110 @@
             background: var(--gold-medium);
             color: var(--white);
             padding: 1.2rem 3rem;
-            text-decoration: none;
             font-size: 1rem;
             font-weight: 600;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: all 0.3s;
             display: inline-block;
-            border: 2px solid var(--gold-medium);
-            position: relative;
-            overflow: hidden;
             border-radius: 50px;
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            transition: left 0.3s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
+            box-shadow: 0 8px 20px rgba(218, 165, 32, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(218, 165, 32, 0.4);
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(218, 165, 32, 0.4);
         }
 
-        /* Mandala Divider */
-        .mandala-divider {
-            text-align: center;
-            padding: 3rem 0;
-            background: var(--cream);
-        }
-
-        .mandala-divider i {
-            font-size: 2.5rem;
-            color: var(--gold-medium);
-            opacity: 0.6;
-        }
-
-        /* Sections */
-        section {
-            padding: 6rem 3rem;
-            position: relative;
-        }
-
+        /* About Section - FONDO MEJORADO */
         .section-light {
-            background: var(--cream);
-        }
-
-        .section-beige {
-            background: var(--beige);
-        }
-
-        .section-gold {
-            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold-medium) 100%);
-            color: var(--white);
-        }
-
-        .section-image {
+            padding: 6rem 2rem;
             background: 
-                linear-gradient(rgba(62, 39, 35, 0.7), rgba(62, 39, 35, 0.7)),
-                url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1920') center/cover no-repeat;
-            color: var(--white);
+                linear-gradient(rgba(255, 248, 220, 0.95), rgba(255, 248, 220, 0.95)),
+                url('https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=1600&q=80') center/cover no-repeat fixed;
+            text-align: center;
         }
 
         .section-title {
             font-family: 'Cormorant Garamond', serif;
-            text-align: center;
             font-size: 3.5rem;
+            color: var(--brown-dark);
             margin-bottom: 1rem;
             letter-spacing: 2px;
-            color: var(--brown-dark);
-            position: relative;
-            font-weight: 600;
-        }
-
-        .section-gold .section-title,
-        .section-image .section-title {
-            color: var(--white);
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background: var(--gold-medium);
         }
 
         .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            margin-bottom: 4rem;
+            font-size: 1.2rem;
             color: var(--brown-medium);
-            font-style: italic;
-            letter-spacing: 1px;
+            margin-bottom: 3rem;
             font-weight: 300;
+            letter-spacing: 1px;
         }
 
-        .section-gold .section-subtitle,
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 2rem;
+            color: var(--brown-dark);
+        }
+
+        .mandala-divider {
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 3rem;
+            color: var(--gold-medium);
+            background: linear-gradient(135deg, var(--cream) 0%, var(--beige) 100%);
+        }
+
+        /* Services Section - FONDO Y CENTRADO MEJORADO */
+        .section-image {
+            padding: 6rem 2rem;
+            background: 
+                linear-gradient(rgba(62, 39, 35, 0.85), rgba(62, 39, 35, 0.85)),
+                url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1600&q=80') center/cover no-repeat fixed;
+            text-align: center;
+        }
+
+        .section-image .section-title {
+            color: var(--gold-light);
+        }
+
         .section-image .section-subtitle {
             color: var(--cream);
         }
 
-        /* About Section */
-        .about-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 500px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px var(--shadow);
-        }
-
-        .about-text h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--gold-dark);
-            letter-spacing: 2px;
-            font-weight: 600;
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-            line-height: 1.9;
-            color: var(--brown-medium);
-            font-size: 1.05rem;
-        }
-
-        .about-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .feature-item i {
-            font-size: 1.5rem;
-            color: var(--gold-medium);
-        }
-
-        /* Services Section */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2.5rem;
-            max-width: 1300px;
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .service-card {
-            background: var(--white);
-            padding: 3rem 2rem;
-            text-align: center;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
+            text-align: center;
             transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--gold-light), var(--gold-medium), var(--gold-dark));
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
 
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px var(--shadow);
+            box-shadow: 0 20px 50px rgba(218, 165, 32, 0.3);
         }
 
         .service-icon {
-            font-size: 4rem;
+            font-size: 3rem;
             color: var(--gold-medium);
             margin-bottom: 1.5rem;
         }
@@ -429,107 +390,139 @@
         .service-card h3 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.8rem;
-            margin-bottom: 1rem;
             color: var(--brown-dark);
-            letter-spacing: 1px;
-            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .service-card p {
             color: var(--brown-medium);
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
 
         .service-duration {
-            font-weight: 600;
-            color: var(--gold-dark);
-            margin-top: 1rem;
+            background: var(--beige);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: var(--brown-dark);
+            font-weight: 500;
         }
 
         .service-price {
-            font-size: 2rem;
+            font-size: 1.5rem;
+            color: var(--gold-dark);
             font-weight: 700;
-            color: var(--gold-medium);
-            margin-top: 1rem;
-            font-family: 'Cormorant Garamond', serif;
+            margin-bottom: 1rem;
         }
 
         .service-recommendation {
-            background: var(--beige);
+            background: rgba(218, 165, 32, 0.1);
             padding: 1rem;
-            margin-top: 1.5rem;
-            border-radius: 8px;
+            border-radius: 10px;
+            border-left: 4px solid var(--gold-medium);
             font-size: 0.9rem;
-            color: var(--brown-medium);
+            color: var(--brown-dark);
+            text-align: left;
+            margin-top: 1.5rem;
         }
 
-        /* Benefits Section */
+        .service-recommendation i {
+            color: var(--gold-medium);
+            margin-right: 0.5rem;
+        }
+
+        /* Benefits Section - FONDO MEJORADO */
+        .section-gold {
+            padding: 6rem 2rem;
+            background: 
+                linear-gradient(rgba(218, 165, 32, 0.95), rgba(184, 134, 11, 0.95)),
+                url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1600&q=80') center/cover no-repeat fixed;
+            text-align: center;
+        }
+
+        .section-gold .section-title {
+            color: var(--white);
+        }
+
+        .section-gold .section-subtitle {
+            color: var(--cream);
+        }
+
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
             max-width: 1300px;
             margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .benefit-card {
             background: rgba(255, 255, 255, 0.15);
-            padding: 2rem;
-            text-align: center;
-            border-radius: 15px;
             backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 15px;
+            text-align: center;
             border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
         }
 
         .benefit-card i {
             font-size: 3rem;
             color: var(--white);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .benefit-card h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
+            font-size: 1.8rem;
+            color: var(--white);
+            margin-bottom: 1rem;
         }
 
         .benefit-card p {
-            font-size: 0.95rem;
-            line-height: 1.6;
+            color: var(--cream);
+            line-height: 1.8;
+            font-size: 1rem;
         }
 
-        /* Schedule Section */
+        /* Schedule Section - CENTRADO MEJORADO */
         .schedule-container {
-            max-width: 1000px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .schedule-info {
             background: var(--white);
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
+            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .schedule-info h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
+            color: var(--brown-dark);
             margin-bottom: 2rem;
-            color: var(--gold-dark);
-            letter-spacing: 1px;
-            font-weight: 600;
+            text-align: center;
         }
 
         .schedule-day {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 0;
+            padding: 1rem;
             border-bottom: 1px solid var(--beige);
         }
 
@@ -538,47 +531,37 @@
         }
 
         .day-name {
-            font-size: 1.1rem;
             font-weight: 600;
             color: var(--brown-dark);
-            text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         .day-time {
-            font-size: 1rem;
-            color: var(--brown-medium);
+            color: var(--gold-dark);
+            font-weight: 500;
         }
 
         .day-time.closed {
-            color: var(--gold-dark);
+            color: var(--brown-medium);
             font-style: italic;
         }
 
         .schedule-cta {
             background: linear-gradient(135deg, var(--gold-medium), var(--gold-dark));
-            padding: 3rem;
+            padding: 2.5rem;
             border-radius: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             text-align: center;
             color: var(--white);
         }
 
         .schedule-cta i {
-            font-size: 5rem;
-            color: var(--white);
-            margin-bottom: 2rem;
+            font-size: 3rem;
+            margin-bottom: 1rem;
         }
 
         .schedule-cta h4 {
             font-family: 'Cormorant Garamond', serif;
             font-size: 2rem;
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            font-weight: 600;
+            margin-bottom: 1rem;
         }
 
         .schedule-cta p {
@@ -586,68 +569,74 @@
             line-height: 1.8;
         }
 
-        /* Contact Section */
+        /* Contact Section - CONTRASTE MEJORADO */
         .contact-content {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 0 auto;
-            text-align: center;
+        }
+
+        .contact-content > p {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            color: var(--cream);
+            font-size: 1.1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .contact-info {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-            margin-top: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            padding: 0 1rem;
         }
 
         .contact-item {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             padding: 2.5rem;
             border-radius: 15px;
-            box-shadow: 0 5px 20px var(--shadow);
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             transition: all 0.3s;
         }
 
         .contact-item:hover {
+            background: rgba(255, 255, 255, 0.25);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px var(--shadow);
         }
 
         .contact-item i {
             font-size: 3rem;
-            color: var(--gold-medium);
-            margin-bottom: 1.5rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
         }
 
         .contact-item h3 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--white);
             margin-bottom: 1rem;
-            color: var(--brown-dark);
-            letter-spacing: 1px;
-            font-weight: 600;
         }
 
         .contact-item p {
-            color: var(--brown-medium);
+            color: var(--cream);
+            font-size: 1.1rem;
         }
 
         .contact-item a {
-            color: var(--gold-dark);
-            text-decoration: none;
+            color: var(--gold-light);
             transition: color 0.3s;
-            font-weight: 500;
         }
 
         .contact-item a:hover {
-            color: var(--gold-medium);
+            color: var(--white);
         }
 
-        /* Footer */
+        /* Footer - ESTRUCTURA MEJORADA */
         footer {
             background: var(--brown-dark);
             color: var(--cream);
-            padding: 4rem 3rem 2rem;
+            padding: 3rem 2rem 1.5rem;
         }
 
         .footer-content {
@@ -659,8 +648,8 @@
             display: grid;
             grid-template-columns: 1.5fr 2fr;
             gap: 4rem;
-            margin-bottom: 3rem;
-            padding-bottom: 3rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
@@ -672,13 +661,12 @@
 
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
+            font-weight: 600;
             color: var(--gold-light);
-            letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-weight: 600;
+            gap: 0.8rem;
         }
 
         .footer-logo i {
@@ -686,52 +674,9 @@
         }
 
         .footer-tagline {
+            font-size: 1rem;
             color: var(--beige);
-            font-size: 1.1rem;
             font-style: italic;
-        }
-
-        .footer-links {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 3rem;
-        }
-
-        .footer-column h4 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.3rem;
-            color: var(--gold-light);
-            margin-bottom: 1.5rem;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .footer-column a {
-            display: block;
-            color: var(--beige);
-            text-decoration: none;
-            margin-bottom: 0.8rem;
-            transition: color 0.3s;
-            font-size: 0.95rem;
-        }
-
-        .footer-column a:hover {
-            color: var(--gold-light);
-            padding-left: 5px;
-        }
-
-        .footer-column p {
-            color: var(--beige);
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .footer-column i {
-            color: var(--gold-medium);
-            font-size: 0.9rem;
         }
 
         .social-links {
@@ -740,31 +685,63 @@
         }
 
         .social-links a {
-            display: flex;
             width: 45px;
             height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid var(--gold-medium);
+            background: rgba(218, 165, 32, 0.2);
             border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
             color: var(--gold-light);
-            text-decoration: none;
+            font-size: 1.2rem;
             transition: all 0.3s;
+            border: 2px solid transparent;
         }
 
         .social-links a:hover {
             background: var(--gold-medium);
             color: var(--white);
             transform: translateY(-3px);
+            border-color: var(--gold-light);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .footer-column h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--gold-light);
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-column a,
+        .footer-column p {
+            display: block;
+            color: var(--beige);
+            margin-bottom: 0.8rem;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .footer-column a:hover {
+            color: var(--gold-light);
+            padding-left: 5px;
+        }
+
+        .footer-column i {
+            color: var(--gold-medium);
+            margin-right: 0.5rem;
+            width: 20px;
         }
 
         .footer-bottom {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-top: 1rem;
+            text-align: center;
+            padding-top: 1.5rem;
         }
 
         .copyright {
@@ -772,109 +749,34 @@
             font-size: 0.9rem;
         }
 
-        /* WhatsApp Button */
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: #25d366;
-            width: 65px;
-            height: 65px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            color: white;
-            text-decoration: none;
-            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
-            z-index: 1000;
-            transition: transform 0.3s;
+            font-size: 2rem;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.15);
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.7);
         }
 
-        /* ------------------------------------ */
-        /* RESPONSIVE MEDIA QUERIES (AJUSTES) */
-        /* ------------------------------------ */
-
-        /* Pantallas de Tabletas (Máx. 1024px) */
-        @media (max-width: 1024px) {
-            nav {
-                padding: 1.5rem 2rem;
-            }
-
-            nav.scrolled {
-                padding: 1rem 2rem;
-            }
-
-            .hero h1 {
-                font-size: 4.5rem;
-            }
-
-            .hero .tagline {
-                font-size: 1.2rem;
-            }
-
-            /* About */
-            .about-content {
-                grid-template-columns: 1fr; /* Colapsa a una columna */
-                gap: 2rem;
-            }
-
-            .about-image {
-                height: 400px;
-            }
-
-            /* Services */
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
-            }
-
-            /* Benefits */
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
-                gap: 1.5rem;
-            }
-
-            /* Schedule */
-            .schedule-container {
-                grid-template-columns: 1fr; /* Colapsa a una columna */
-                gap: 2rem;
-            }
-
-            .schedule-cta {
-                padding: 2rem;
-            }
-
-            /* Contact */
-            .contact-info {
-                grid-template-columns: repeat(3, 1fr); /* Se mantiene, pero se ajusta abajo si es muy angosto */
-                gap: 1.5rem;
-            }
-
-            .footer-main {
-                grid-template-columns: 1fr; /* Colapsa footer principal */
-            }
-        }
-
-        /* Pantallas Móviles (Máx. 768px) */
+        /* RESPONSIVE - MEJORADO */
         @media (max-width: 768px) {
-            .logo {
-                font-size: 1.3rem;
-            }
-
-            .logo i {
-                font-size: 1.3rem;
-            }
-            /* Navbar CORRECCIÓN */
-            nav {
-                padding: 1rem 1.5rem; /* Ajuste de padding en móvil */
-            }
-            nav.scrolled {
-                padding: 0.8rem 1.5rem;
+            .nav-container {
+                padding: 1.2rem 2rem;
             }
 
             nav ul {
@@ -883,30 +785,20 @@
 
             .menu-toggle {
                 display: block;
-                font-size: 1.3rem;
             }
-            
-            .nav-container {
-                padding-left: 0;
-                padding-right: 0;
-            }
-            
-            /* Hero */
+
             .hero h1 {
                 font-size: 3rem;
+                letter-spacing: 2px;
             }
 
             .hero .tagline {
                 font-size: 1rem;
+                letter-spacing: 2px;
             }
 
-            .btn-primary {
-                padding: 1rem 2rem;
-            }
-            
-            /* Sections */
-            section {
-                padding: 4rem 1.5rem;
+            .hero-icon {
+                font-size: 3rem;
             }
 
             .section-title {
@@ -914,75 +806,156 @@
             }
 
             .section-subtitle {
-                margin-bottom: 3rem;
+                font-size: 1rem;
             }
 
-            /* About CORRECCIÓN */
-            .about-content {
-                grid-template-columns: 1fr; 
-                gap: 2rem;
-            }
-            
-            .about-image {
-                height: 300px; /* Altura más adecuada para móviles */
-            }
-            
-            .about-text h3 {
-                text-align: center; /* Centrar título secundario */
-            }
-            
-            .about-features {
-                grid-template-columns: 1fr; /* Colapsa features a una columna */
-            }
-            
-            .feature-item {
-                justify-content: flex-start; /* Asegurar alineación a la izquierda si el texto es largo */
-            }
-
-
-            /* Services */
-            .services-grid {
-                grid-template-columns: 1fr; /* Una columna en móviles */
-                gap: 2rem;
-            }
-
-            /* Benefits */
-            .benefits-grid {
-                grid-template-columns: 1fr; /* Una columna en móviles */
-                gap: 1.5rem;
-            }
-            
-            /* Schedule */
-            .schedule-container {
-                gap: 2rem;
-            }
-            
-            /* Contact CORRECCIÓN */
+            .services-grid,
+            .benefits-grid,
+            .schedule-container,
             .contact-info {
-                grid-template-columns: 1fr; /* Una columna en móviles */
+                grid-template-columns: 1fr;
                 gap: 2rem;
             }
-            
-            /* Footer */
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
             .footer-links {
                 grid-template-columns: 1fr;
                 gap: 2rem;
             }
 
-            .footer-logo {
-                font-size: 2rem;
+            .footer-brand {
+                text-align: center;
             }
 
-            .footer-logo i {
-                font-size: 1.6rem;
+            .footer-logo {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .footer-column {
+                text-align: center;
+            }
+
+            .footer-column a:hover {
+                padding-left: 0;
             }
 
             .whatsapp-float {
                 width: 55px;
                 height: 55px;
-                font-size: 28px;
+                font-size: 1.8rem;
                 bottom: 20px;
                 right: 20px;
+            }
+
+            .btn-primary {
+                padding: 1rem 2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 1rem 3.5rem;
+            }
+            
+            nav.scrolled .nav-container {
+                padding: 0.7rem 3.5rem;
+            }
+
+            .logo {
+                font-size: 1.15rem;
+                gap: 0.5rem;
+            }
+
+            .logo i {
+                font-size: 1.15rem;
+            }
+            
+            .menu-toggle {
+                right: 1.5rem;
+                font-size: 1.6rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .tagline {
+                font-size: 0.9rem;
+            }
+
+            .section-light,
+            .section-image,
+            .section-gold {
+                padding: 4rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .service-card,
+            .benefit-card,
+            .contact-item,
+            .schedule-info,
+            .schedule-cta {
+                padding: 2rem 1.5rem;
+            }
+
+            .mandala-divider {
+                font-size: 2.5rem;
+                padding: 2rem 0;
+            }
+            
+            /* Mejoras sección contacto en móvil pequeño */
+            .contact-content > p {
+                font-size: 1rem;
+                padding: 0 1rem;
+                margin-bottom: 2rem;
+            }
+            
+            .contact-info {
+                gap: 1.5rem;
+                padding: 0 0.5rem;
+            }
+            
+            .contact-item {
+                padding: 1.8rem 1.2rem;
+            }
+            
+            .contact-item i {
+                font-size: 2.5rem;
+            }
+            
+            .contact-item h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .contact-item p {
+                font-size: 0.95rem;
+            }
+            
+            .contact-item a {
+                word-break: break-word;
+            }
+            
+            /* Logo footer más pequeño en móvil */
+            .footer-logo {
+                font-size: 1.5rem;
+                gap: 0.6rem;
+            }
+            
+            .footer-logo i {
+                font-size: 1.5rem;
             }
         }
     </style>
@@ -990,9 +963,9 @@
 <body>
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="logo" style="margin-right: 45px;">
+            <a href="#" class="logo">
                 <i class="fas fa-sun"></i>
-                Vibras Amarillas
+                VIBRAS AMARILLAS
             </a>
             <ul>
                 <li><a href="#about">Nosotros</a></li>
@@ -1016,135 +989,56 @@
         </div>
     </nav>
 
-    <section class="hero" id="hero">
+    <section class="hero">
         <div class="hero-content">
             <div class="hero-icon">
                 <i class="fas fa-spa"></i>
             </div>
-            <h1>VIBRAS AMARILLAS</h1>
-            <p class="tagline">Masajes Terapéuticos · Equilibrio · Bienestar</p>
-            <a href="#contact" class="btn-primary">Reservá tu Sesión</a>
+            <h1>Vibras Amarillas</h1>
+            <p class="tagline">Conexión, Equilibrio y Bienestar</p>
+            <a href="#services" class="btn-primary">Descubrí Nuestros Masajes</a>
         </div>
     </section>
-
-    <div class="mandala-divider">
-        <i class="fas fa-dharmachakra"></i>
-    </div>
 
     <section id="about" class="section-light">
         <h2 class="section-title">Sobre Nosotros</h2>
-        <p class="section-subtitle">Un espacio de paz y renovación</p>
+        <p class="section-subtitle">Tu espacio de bienestar integral</p>
         <div class="about-content">
-            <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800" alt="Espacio de masajes" class="about-image">
-            <div class="about-text">
-                <h3>Tu Refugio de Tranquilidad</h3>
-                <p>En Vibras Amarillas creamos un ambiente único donde el bienestar físico y mental se encuentran. Cada sesión está diseñada para liberar tensiones, restaurar energías y reconectar con tu esencia.</p>
-                <p>Utilizamos técnicas profesionales de masaje combinadas con aromaterapia, música relajante y un espacio especialmente preparado para tu comodidad y relajación total.</p>
-                <div class="about-features">
-                    <div class="feature-item">
-                        <i class="fas fa-leaf"></i>
-                        <span>Productos naturales</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-hands"></i>
-                        <span>Técnicas profesionales</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-om"></i>
-                        <span>Ambiente zen</span>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-heart"></i>
-                        <span>Atención personalizada</span>
-                    </div>
-                </div>
-            </div>
+            <p class="about-text">
+                En <strong>Vibras Amarillas</strong> creemos que el bienestar comienza desde adentro. 
+                Nuestro espacio está diseñado para que te desconectes del estrés diario y te reconectes 
+                con tu esencia a través de masajes terapéuticos personalizados.
+            </p>
+            <p class="about-text">
+                Combinamos técnicas ancestrales con métodos modernos para brindarte una experiencia 
+                transformadora que equilibra cuerpo, mente y espíritu. Cada sesión es única y adaptada 
+                a tus necesidades específicas.
+            </p>
+            <p class="about-text">
+                Nos especializamos en crear un ambiente cálido y acogedor donde cada detalle está pensado 
+                para tu relajación profunda. Tu bienestar es nuestra prioridad.
+            </p>
         </div>
     </section>
 
     <div class="mandala-divider">
-        <i class="fas fa-yin-yang"></i>
+        <i class="fas fa-lotus"></i>
     </div>
 
-    <section id="services" class="section-beige">
+    <section id="services" class="section-image">
         <h2 class="section-title">Nuestros Servicios</h2>
-        <p class="section-subtitle">Encuentra el masaje perfecto para ti</p>
+        <p class="section-subtitle">Elegí el masaje ideal para vos</p>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="fas fa-hand-sparkles"></i>
+                    <i class="fas fa-spa"></i>
                 </div>
                 <h3>Masaje Relajante</h3>
-                <p>Técnicas suaves y envolventes que liberan tensiones musculares y reducen el estrés acumulado.</p>
-                <div class="service-duration">30 min / 40 min / 60 min</div>
-                <div class="service-price">$7.000 - $12.000</div>
-                <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> Perfecto para deportistas, trabajos de oficina y contracturas crónicas
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
-                <h3>Masaje Cráneo Facial</h3>
-                <p>Liberación de tensión en cabeza, rostro y cuello. Alivia migrañas y promueve claridad mental.</p>
-                <div class="service-duration">30 min</div>
-                <div class="service-price">$7.000</div>
-                <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> Recomendado para dolores de cabeza, bruxismo y tensión ocular
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-fire"></i>
-                </div>
-                <h3>Masaje con Piedras</h3>
-                <p>Termoterapia con piedras calientes que penetran profundamente relajando músculos y energizando.</p>
-                <div class="service-duration">60 min</div>
-                <div class="service-price">$15.000</div>
-                <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> Ideal para circulación, dolores crónicos y relajación profunda
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-seedling"></i>
-                </div>
-                <h3>Aromaterapia</h3>
-                <p>Masaje relajante con aceites esenciales naturales que equilibran cuerpo, mente y emociones.</p>
+                <p>Presión suave y movimientos fluidos que liberan tensiones acumuladas, promoviendo una relajación profunda.</p>
                 <div class="service-duration">40 min / 60 min</div>
-                <div class="service-price">$10.000 - $14.000</div>
+                <div class="service-price">$8.000 - $12.000</div>
                 <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> Perfecto para ansiedad, insomnio y equilibrio emocional
-                </div>
-            </div>
-
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-child"></i>
-                </div>
-                <h3>Masaje Corporal Completo</h3>
-                <p>Experiencia integral que combina diferentes técnicas para un bienestar total del cuerpo.</p>
-                <div class="service-duration">60 min</div>
-                <div class="service-price">$13.000</div>
-                <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> La opción más completa para renovación física y mental
-                </div>
-            </div>
-            
-            <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-hand-sparkles"></i>
-                </div>
-                <h3>Masaje Relajante</h3>
-                <p>Técnicas suaves y envolventes que liberan tensiones musculares y reducen el estrés acumulado.</p>
-                <div class="service-duration">30 min / 40 min / 60 min</div>
-                <div class="service-price">$7.000 - $12.000</div>
-                <div class="service-recommendation">
-                    <i class="fas fa-info-circle"></i> Ideal para quienes buscan relajación profunda y alivio del estrés diario
+                    <i class="fas fa-info-circle"></i> Ideal para combatir estrés, ansiedad e insomnio
                 </div>
             </div>
 
@@ -1160,7 +1054,58 @@
                     <i class="fas fa-info-circle"></i> Perfecto para deportistas, trabajos de oficina y contracturas crónicas
                 </div>
             </div>
-            
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <h3>Masaje con Piedras Calientes</h3>
+                <p>Terapia ancestral que combina calor de piedras volcánicas con movimientos relajantes para equilibrar energías.</p>
+                <div class="service-duration">60 min</div>
+                <div class="service-price">$15.000</div>
+                <div class="service-recommendation">
+                    <i class="fas fa-info-circle"></i> Recomendado para relajación profunda y mejora de circulación
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Masaje Circulatorio</h3>
+                <p>Técnicas que estimulan el flujo sanguíneo, reducen la retención de líquidos y mejoran la oxigenación celular.</p>
+                <div class="service-duration">50 min</div>
+                <div class="service-price">$11.000</div>
+                <div class="service-recommendation">
+                    <i class="fas fa-info-circle"></i> Beneficioso para piernas cansadas y problemas circulatorios
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Aromaterapia</h3>
+                <p>Masaje suave combinado con aceites esenciales puros que estimulan los sentidos y equilibran emociones.</p>
+                <div class="service-duration">50 min</div>
+                <div class="service-price">$13.000</div>
+                <div class="service-recommendation">
+                    <i class="fas fa-info-circle"></i> Especial para equilibrio emocional y relajación mental profunda
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-yin-yang"></i>
+                </div>
+                <h3>Reflexología</h3>
+                <p>Estimulación de puntos reflejos en pies y manos que conectan con órganos internos y sistemas corporales.</p>
+                <div class="service-duration">40 min</div>
+                <div class="service-price">$10.000</div>
+                <div class="service-recommendation">
+                    <i class="fas fa-info-circle"></i> Excelente para equilibrar energía vital y aliviar molestias específicas
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1251,7 +1196,7 @@
         <h2 class="section-title">Contacto</h2>
         <p class="section-subtitle">Estamos para ayudarte</p>
         <div class="contact-content">
-            <p style="max-width: 600px; margin: 0 auto 3rem; color: var(--cream); font-size: 1.1rem;">
+            <p>
                 ¿Tenés dudas o querés conocer más sobre nuestros servicios? Contactanos y con gusto te asesoraremos para elegir el masaje ideal para vos.
             </p>
             <div class="contact-info">
@@ -1313,7 +1258,7 @@
             
             <div class="footer-bottom">
                 <div class="copyright">
-                    © 2025 Vibras Amarillas. Todos los derechos reservados.
+                    © 2025 Vibras Amarillas. Todos los derechos reservados. | Diseñado por <strong>sageDev</strong>
                 </div>
             </div>
         </div>
